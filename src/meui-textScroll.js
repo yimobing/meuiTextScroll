@@ -14,6 +14,7 @@
                 return;
             }
             var defaults = {
+                content: '', //自定义滚动区域内容,默认空(可选)
                 source: {}, //数据源
                 format: ["title", "description", "pubdate", "href"], //自定义数据源字段,数组格式(可选). 数组元素分别对应数据源字段：标题, 描述(可选), 发布时间(可选), 链接地址(可选)
                 caption: '', //区块标题(可选)
@@ -28,7 +29,8 @@
                 down: "but_down" //向下按钮ID属性名称(可选)
             }
             var settings = $.extend(true, {}, defaults, opt || {});
-            var dSource = settings.source,
+            var dContent = settings.content,
+                dSource = settings.source,
                 dFormat = settings.format,
                 dCaption = settings.caption,
                 dWidth = settings.width.toString().replace(/px/g, ''),
@@ -40,11 +42,8 @@
                 dPageBtn = settings.pageBtn,
                 dUp = settings.up,
                 dDown = settings.down;
-            if(dSource === '' || $.isEmptyObject(dSource)) return;
-            if(typeof dSource != 'object') return;
-            if(typeof dSource.data == 'undefined') return;
+        
             //HTML
-            var isGoOn = true;
             var allHtml = [
                 dCaption == '' ? '' : '<div class="scrollCaption">' + dCaption + '</div>',
                 '<div id="scrollDiv"></div>',
@@ -52,30 +51,40 @@
                     '<div class="updown up" id="' + dUp + '">向上</div><div class="updown down" id="' + dDown + '">向下</div>',
                 '</div>'
             ].join('\r\n');
+            
+            var isGoOn = true;
             var listHtml = '<ul>';
-            $.each(dSource.data, function(i, item){
-                var _title = item[dFormat[0]],
-                    _description = item[dFormat[1]],
-                    _pubdate = item[dFormat[2]],
-                    _href = item[dFormat[3]];
-                if(typeof _title == 'undefined'){
-                    alert('数据源不含' + dFormat[0] + '字段，请检查');
-                    isGoOn = false;
-                    return false;
-                }
-                if(typeof _description == 'undefined') _description = '';
-                if(typeof _pubdate == 'undefined') _pubdate = '';
-                if(typeof _href == 'undefined' || _href === '') _href = 'javascript:;';
-                listHtml += [
-                    '<li>',
-                        '<h3><a href="' + _href + '" class="linktit">' + _title + '</a></h3>',
-                        _pubdate == '' ? '' : '<span class="time">' + _pubdate + '</span>',
-                        _description == '' ? '' : '<div>' + _description + '</div>',
-                    '</li>'
-                ].join('\r\n');
-            })
+            if(dContent !== ''){
+                listHtml += dContent;
+            }else{
+                if(dSource === '' || $.isEmptyObject(dSource)) return;
+                if(typeof dSource != 'object') return;
+                if(typeof dSource.data == 'undefined') return;
+                $.each(dSource.data, function(i, item){
+                    var _title = item[dFormat[0]],
+                        _description = item[dFormat[1]],
+                        _pubdate = item[dFormat[2]],
+                        _href = item[dFormat[3]];
+                    if(typeof _title == 'undefined'){
+                        alert('数据源不含' + dFormat[0] + '字段，请检查');
+                        isGoOn = false;
+                        return false;
+                    }
+                    if(typeof _description == 'undefined') _description = '';
+                    if(typeof _pubdate == 'undefined') _pubdate = '';
+                    if(typeof _href == 'undefined' || _href === '') _href = 'javascript:;';
+                    listHtml += [
+                        '<li>',
+                            '<h3><a href="' + _href + '" class="linktit">' + _title + '</a></h3>',
+                            _pubdate == '' ? '' : '<span class="time">' + _pubdate + '</span>',
+                            _description == '' ? '' : '<div>' + _description + '</div>',
+                        '</li>'
+                    ].join('\r\n');
+                })
+            }
             listHtml += '</ul>';
             if(!isGoOn) return;
+
             this.empty().append(allHtml).css({
                 width: dWidth,
                 backgroundColor: '#fff',
