@@ -20,11 +20,24 @@
 
 <body>
     <style>
-        .scrollbox{margin: 15px auto;}
+        .container{
+            display: flex;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: box;
+        }
+        .scrollbox{margin: 15px 15px 0 0;}
     </style>
 
     <div class="wrap">
-        <div class="scrollbox"></div>
+
+        <div class="container">
+            <div class="scrollbox" id="scrollbox-1"></div>
+            <div class="scrollbox" id="scrollbox-2"></div>
+        </div>
+        
     </div><!--/.wrap-->
     <!--================================================================================-->
     <!--                            JAVASCRIPT                                          -->
