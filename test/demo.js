@@ -44,12 +44,12 @@ timer = setInterval((function target(){
     $("#scrollbox-1").meuiTextScroll({
         source: get_data_message(), //数据源
         format: ["title", "shuoming", "create_time", ""], //自定义数据源字段,数组格式(可选). 数组元素分别对应数据源字段：标题, 描述, 发布时间, 链接地址
-        caption: '询价单最新消息（每隔3秒滚动）', //区块标题(可选)
+        caption: '询价单最新消息（每隔2秒滚动）', //区块标题(可选)
         width: 340, //滚动区域宽(可选)
         height: 500, //滚动区域高(可选)
         line: 1, //每次滚动的行数(可选)
         speed: 500, //滚动速度(毫秒)(可选)
-        timer: 3000, //滚动间隔时间(毫秒)(可选)
+        timer: 2000, //滚动间隔时间(毫秒)(可选)
         direction: 'up', //滚动方向(可选). up 向上(默认), down 向下
         pageBtn: true, //是否显示上下翻页按钮,默认true(可选)
         up: "but_up", //向上按钮ID属性名称(可选)
