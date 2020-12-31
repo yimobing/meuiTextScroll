@@ -15,8 +15,8 @@
             }
             var defaults = {
                 content: '', //自定义滚动区域内容,默认空(可选)
-                source: {}, //数据源
-                format: ["title", "description", "pubdate", "href"], //自定义数据源字段,数组格式(可选). 数组元素分别对应数据源字段：标题, 描述(可选), 发布时间(可选), 链接地址(可选)
+                source: {}, //数据源,仅当参数content不为空时有效.
+                format: ["title", "description", "pubdate", "href"], //自定义数据源字段,数组格式,仅当参数content不为空时有效(可选). 数组元素分别对应数据源字段：标题, 描述(可选), 发布时间(可选), 链接地址(可选)
                 caption: '', //区块标题(可选)
                 width: 340, //滚动区域宽(可选)
                 height: 500, //滚动区域高(可选)
