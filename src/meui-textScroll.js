@@ -14,7 +14,7 @@
                 return;
             }
             var defaults = {
-                content: '', //自定义滚动区域内容,默认空(可选)
+                content: '', //自定义滚动区域内容,默认空(可选). 注意：每一行数据HTML代码只能用li标签包裹,不能用其它标签
                 source: {}, //数据源,仅当参数content不为空时有效.
                 format: ["title", "description", "pubdate", "href"], //自定义数据源字段,数组格式,仅当参数content不为空时有效(可选). 数组元素分别对应数据源字段：标题, 描述(可选), 发布时间(可选), 链接地址(可选)
                 caption: '', //区块标题(可选)
